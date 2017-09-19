@@ -55,6 +55,30 @@ android {
     }
 }
 
+ext {
+    bintrayRepo = 'BlueRangeSDK'
+    bintrayName = 'BlueRange-SDK-Android'
+
+    publishedGroupId = 'com.mway.bluerange.android.sdk'
+    libraryName = 'BlueRangeSDK'
+    artifact = 'BlueRangeSDK'
+
+    libraryDescription = 'Android SDK for interaction with Relution SmartBeacons.'
+
+    siteUrl = 'https://github.com/me-mway/BlueRange-SDK-Android'
+    gitUrl = 'https://github.com/me-mway/BlueRange-SDK-Android.git'
+
+    libraryVersion = '1.1.10'
+
+    developerId = 'me-mway'
+    developerName = 'me-mway'
+    developerEmail = 'm.ehrlich@mwaysolutions.com'
+
+    licenseName = 'New BSD License'
+    licenseUrl = 'https://opensource.org/licenses/BSD-3-Clause'
+    allLicenses = ["BSD 3-Clause"]
+}
+
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
 
@@ -76,3 +100,6 @@ dependencies {
     compile ('com.loopj.android:android-async-http:1.4.9')
     compile files('libs/javolution-core-java-6.1.0-20140201.140336-13.jar')
 }
+
+apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/installv1.gradle'
+apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/bintrayv1.gradle'
