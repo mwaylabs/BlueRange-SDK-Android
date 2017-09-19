@@ -8,7 +8,7 @@ android {
         minSdkVersion 18
         targetSdkVersion 26
         versionCode 6
-        versionName "1.1"
+        versionName "1.1.10"
     }
     buildTypes {
         release {
@@ -58,10 +58,11 @@ android {
 ext {
     bintrayRepo = 'BlueRangeSDK'
     bintrayName = 'BlueRange-SDK-Android'
+    versionName = "1.1.10"
 
     publishedGroupId = 'com.mway.bluerange.android.sdk'
-    libraryName = 'BlueRangeSDK'
-    artifact = 'BlueRangeSDK'
+    libraryName = 'bluerangesdk'
+    artifact = 'bluerangesdk'
 
     libraryDescription = 'Android SDK for interaction with Relution SmartBeacons.'
 
