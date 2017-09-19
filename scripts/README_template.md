@@ -72,7 +72,7 @@ More specifically, the following features are supported:
 The easiest way to import the BlueRangeSDK is to add a dependency to your project's ```build.gradle``` file, after you have imported the bluerangesdk-release.aar which you can find under the path bluerangesdk/build/outputs/aar.
 ```gradle
 dependencies {
-    compile project(':bluerangesdk')
+    compile 'com.mway.bluerange.android.sdk:bluerangesdk:1.1.10'
 }
 ```
 </android>
