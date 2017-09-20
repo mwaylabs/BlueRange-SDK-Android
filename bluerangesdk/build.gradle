@@ -8,7 +8,7 @@ android {
         minSdkVersion 18
         targetSdkVersion 26
         versionCode 6
-        versionName "1.1.10"
+        versionName "1.1.11"
     }
     buildTypes {
         release {
@@ -58,7 +58,7 @@ android {
 ext {
     bintrayRepo = 'BlueRangeSDK'
     bintrayName = 'BlueRange-SDK-Android'
-    versionName = "1.1.10"
+    versionName = "1.1.11"
 
     publishedGroupId = 'com.mway.bluerange.android.sdk'
     libraryName = 'bluerangesdk'
@@ -69,7 +69,7 @@ ext {
     siteUrl = 'https://github.com/me-mway/BlueRange-SDK-Android'
     gitUrl = 'https://github.com/me-mway/BlueRange-SDK-Android.git'
 
-    libraryVersion = '1.1.10'
+    libraryVersion = '1.1.11'
 
     developerId = 'me-mway'
     developerName = 'me-mway'
