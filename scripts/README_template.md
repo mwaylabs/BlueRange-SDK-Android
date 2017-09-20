@@ -1,6 +1,9 @@
 
 # BlueRange SDK
 
+<android>
+[![CI Status](https://travis-ci.org/me-mway/BlueRange-SDK-Android.svg?branch=master)](https://travis-ci.org/me-mway/BlueRange-SDK-Android)
+</android>
 <iOS>
 [![CI Status](https://travis-ci.org/me-mway/BlueRange-SDK-iOS.svg?branch=master)](https://travis-ci.org/me-mway/BlueRange-SDK-iOS)
 </iOS>

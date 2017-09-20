@@ -2,6 +2,9 @@
 # BlueRange SDK
 
 
+[![CI Status](https://travis-ci.org/me-mway/BlueRange-SDK-Android.svg?branch=master)](https://travis-ci.org/me-mway/BlueRange-SDK-Android)
+
+
 ## Overview
 The BlueRange SDK is a library for Android and iOS that enables apps to interact with [Relution SmartBeacons](https://www.relution.io/de/beacon-management-plattform/). SmartBeacons can be managed, monitored, updated and configured centrally in Relution IoT by building up a BLE network (mesh) based on our [FruityMesh](https://github.com/mwaylabs/fruitymesh/wiki) beacon firmware making them constantly connected to the cloud.
 
