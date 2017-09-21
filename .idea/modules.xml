@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/bluerangesdk/bluerangesdk.iml" filepath="$PROJECT_DIR$/bluerangesdk/bluerangesdk.iml" />
+      <module fileurl="file://$PROJECT_DIR$/relution-beacon-sdk-android.iml" filepath="$PROJECT_DIR$/relution-beacon-sdk-android.iml" />
+    </modules>
+  </component>
+</project>

@@ -1,0 +1,105 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion 26
+    buildToolsVersion '25.0.0'
+
+    defaultConfig {
+        minSdkVersion 18
+        targetSdkVersion 26
+        versionCode 6
+        versionName "1.1.12"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    packagingOptions {
+        pickFirst 'META-INF/DEPENDENCIES.txt'
+        pickFirst'META-INF/LICENSE.txt'
+        pickFirst 'META-INF/NOTICE.txt'
+        pickFirst 'META-INF/NOTICE'
+        pickFirst 'META-INF/LICENSE'
+        pickFirst 'META-INF/DEPENDENCIES'
+        pickFirst 'META-INF/notice.txt'
+        pickFirst 'META-INF/license.txt'
+        pickFirst 'META-INF/dependencies.txt'
+        pickFirst 'META-INF/LGPL2.1'
+    }
+
+    lintOptions {
+        disable 'InvalidPackage'
+    }
+
+    libraryVariants.all { variant ->
+        if(variant.name.equals('release'))
+            task("generateJavadoc", type: Javadoc) {
+                exclude "**/examples/**"
+                description "Generate Javadoc"
+                destinationDir = file("../docs/")
+                source = android.sourceSets.main.java.srcDirs
+                title = "BlueRange SDK"
+                ext.androidJar = "${android.sdkDirectory}/platforms/${android.compileSdkVersion}/android.jar"
+                classpath = files(variant.javaCompile.classpath.files) + files(ext.androidJar)
+            }
+    }
+
+    repositories {
+        jcenter()
+        maven {
+            url "https://maven.google.com"
+        }
+    }
+}
+
+ext {
+    bintrayRepo = 'BlueRangeSDK'
+    bintrayName = 'BlueRange-SDK-Android'
+    versionName = "1.1.12"
+
+    publishedGroupId = 'com.mway.bluerange.android.sdk'
+    libraryName = 'bluerangesdk'
+    artifact = 'bluerangesdk'
+
+    libraryDescription = 'Android SDK for interaction with Relution SmartBeacons.'
+
+    siteUrl = 'https://github.com/me-mway/BlueRange-SDK-Android'
+    gitUrl = 'https://github.com/me-mway/BlueRange-SDK-Android.git'
+
+    libraryVersion = '1.1.12'
+
+    developerId = 'me-mway'
+    developerName = 'me-mway'
+    developerEmail = 'm.ehrlich@mwaysolutions.com'
+
+    licenseName = 'New BSD License'
+    licenseUrl = 'https://opensource.org/licenses/BSD-3-Clause'
+    allLicenses = ["BSD 3-Clause"]
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+
+    // Testing
+    testCompile 'junit:junit:4.12'
+    testCompile 'org.mockito:mockito-core:1.10.19'
+    testCompile 'org.json:json:20140107'
+    androidTestCompile 'junit:junit:4.12'
+    androidTestCompile 'org.mockito:mockito-core:1.10.19'
+    androidTestCompile 'com.google.dexmaker:dexmaker:1.2'
+    androidTestCompile 'com.google.dexmaker:dexmaker-mockito:1.2'
+
+    // Production
+    compile 'com.android.support:appcompat-v7:26.0.2'
+    compile 'com.fasterxml.jackson.core:jackson-databind:2.8.9'
+    compile ('org.altbeacon:android-beacon-library:2.7.1')
+    compile ('com.loopj.android:android-async-http:1.4.9')
+}
+
+if (project.rootProject.file('local.properties').exists()) {
+    apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/installv1.gradle'
+    apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/bintrayv1.gradle'
+}
