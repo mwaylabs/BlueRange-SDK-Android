@@ -6,16 +6,16 @@
 
 
 ## Overview
-The BlueRange SDK is a library for Android and iOS that enables apps to interact with [Relution SmartBeacons](https://www.relution.io/de/beacon-management-plattform/). SmartBeacons can be managed, monitored, updated and configured centrally in Relution IoT by building up a BLE network (mesh) based on our [FruityMesh](https://github.com/mwaylabs/fruitymesh/wiki) beacon firmware making them constantly connected to the cloud.
+The BlueRange SDK is a library for Android and iOS that enables apps to interact with [Relution SmartBeacons](https://www.relution.io/de/beacon-management-plattform/). SmartBeacons can be managed, monitored, updated and configured remotely with the Relution IoT platform by building up a BLE network (mesh) based on the [FruityMesh](https://github.com/mwaylabs/fruitymesh/wiki) beacon firmware making them constantly connected to the cloud.
 
 ## Features
-Currently the BlueRange SDK supports iOS devices that run at least on iOS 8.0 and Android devices with API level 18 or higher. Features that are based on BLE advertising, however, additionally require the Bluetooth LE peripheral mode (API level 21).
+Currently the BlueRange SDK supports iOS devices that run at least on iOS 8.0 and Android devices with API level 18 or higher. Features that are based on BLE advertising, however, require the Bluetooth LE peripheral mode on Android devices (API level 21).
 
 The BlueRange SDK is build up of a core and a service layer.
 
-The **core layer** contains a set of components that simplify processing streams of beacon messages (e.g. iBeacon or Eddystone messages). These message processing components can be combined to form a flexible event driven architecture.
+The **core layer** contains a set of components that simplify beacon message stream processing (e.g. iBeacon or Eddystone messages). These message processing components can be combined resulting in a flexible event driven architecture.
 
-The **service layer** builds on top of the core layer and contains Relution IoT specific services. 
+The **service layer** builds on top of the core layer and connects your app with Relution. 
 
 More specifically, the following features are supported:
 
@@ -25,12 +25,12 @@ More specifically, the following features are supported:
 - Sending advertising messages for heatmap generation.
 
 #### Scanning
-- Scanning beacon messages of different schemes:
+- Scanning beacon messages of different formats:
     - **iBeacon** message: Apple's standardized iBeacon format for BLE advertising which contains an identifier triple (UUID, major and minor).
     - **Eddystone UID** message: One of Google's standardized BLE beacon formats which consists of a 10-byte namespace UID and a 6-byte instance identifier.
-    - **Eddystone URL** message: Another Eddystone beacon format that contains a URL.
-    - **Join Me** message: Beacons based on FruityMesh broadcast these messages to establish a beacon network. Each packet holds the beacon id, its connectivity and some more information that can be used to identify and analyze Relution SmartBeacons.
-    - **Relution Tag** message: An advertising message format only supported by Relution IoT. It contains a list of tags used for offline proximity messaging scenarios.
+    - **Eddystone URL** message: Another Eddystone beacon format containing a URL.
+    - **Join Me** message: Beacons based on FruityMesh broadcast these messages to establish a beacon network. Each packet holds the beacon ID, its connectivity and some more information that can be used to identify and analyze Relution SmartBeacons.
+    - **Relution Tag** message: An advertising message format only supported by Relution IoT. It contains a list of tags used for offline proximity marketing scenarios.
 	- **Asset tracking** message: The advertising message format used by Relution AssetBeacons. Asset beacons can be used for asset localization and tracking.
 - Scanning will be continued when the app is running in **background**. This feature, however, is limited due to Apple restrictions.
 - **Energy efficiency**: can be controlled by changing the scan cycle duration and sleep interval.
@@ -41,15 +41,15 @@ More specifically, the following features are supported:
 
 #### Reporting
 - Messages logged over a long period of time can be summed up to **status reports** and published to the cloud. 
-- The cloud could evaluate these reports for **heatmaps generation** or **indoor positioning**.
+- The cloud could evaluate these reports for **heatmaps generation** or server-side **indoor localization**.
 
 #### Aggregating
-- Most proximity messaging use cases require stable signal strengths (RSSI) to correctly estimate distances to beacons. Message aggregators will **average RSSI values** of beacon message streams using average filters.
+- Most proximity messaging use cases require stable signal strengths (RSSI) to correctly estimate distances to beacons. Message aggregators can be used to **average RSSI measurements** of beacon message streams.
 
 #### Triggering
-- The message trigger can be used to implement **proximity messaging** scenarios. Whenever messages arrive andspecific time and/or location conditions are fulfilled, the trigger will execute an action and notify your app. Currently supported action parameters are:
+- A message trigger can be used to implement **proximity marketing** scenarios. Whenever a beacon message arrives, the trigger executes an action, if the predefined time or location conditions are fulfilled and notifies your app about the action execution. Currently supported action parameters are:
   - Action delay: Actions will be executed after a predefined delay.
-  - Action lock: Actions will be blocked for a specific amount of time after they have been triggered.
+  - Action lock: Actions will be locked for a specific amount of time after they have been triggered.
   - Activation distance: Actions will only be triggered, if the device has a distance to the beacon which falls below a predefined threshold.
   - Validation period: An action can have a start and end validation time.
 
@@ -58,11 +58,11 @@ More specifically, the following features are supported:
 #### Relution SmartBeacon Calibration
 - Since each beacon varies in its radio characteristics, distance estimation can be improved by calibrating the RSSI.
 
-#### Relution Proximity messaging
-- Realization of proximity messaging (which is called "Relution Campaigns" in Relution IoT).
+#### Relution Proximity marketing
+- Realization of proximity marketing (also called "Relution Campaigns" in Relution IoT).
 
 #### Relution Heatmaps
-- The device will send advertising messages which will be collected by the beacons for heatmap generation in the cloud. 
+- The device will send advertising messages being collected by the beacons for heatmap generation in the cloud. 
 
 ## API reference
 - Use the API reference in the ```docs``` folder for more information about the specific classes.
@@ -107,10 +107,10 @@ The following section shows you some code samples that may help you to integrate
 
 ### Relution IoT Services
 #### Service configuration
-If your app should depend on Relution services, the primary class of interest is ```RelutionIoTService```. As can be seen below, you must configure the service before starting it.
-- **Campaigns**: Turn on this feature, if you want to use Relution proximity messaging and get notified about executed actions that you defined in the Relution "campaigns" section.
+If your app should be connected to Relution, use the ```RelutionIoTService```. As can be seen below, you must configure the service before you start it.
+- **Campaigns**: Turn on this feature, if you want to use Relution proximity marketing and get notified about executed actions that you defined in the Relution "campaigns" section.
 - **Analytics**: Turn on this feature, if you want the SDK to periodically send reports to Relution, which could later be used for analytics.
-- **Heatmap**: Turn on this feature, if you want the device to send out heatmap messages. Relution SmartBeacons will estimate the number of devices next to them and send heatmap reports to the cloud.
+- **Heatmap**: Turn on this feature, if you want the device to send out heatmap messages. The Relution SmartBeacons will estimate the number of devices next to them and send heatmap reports to the cloud.
 - **Logging**: Turn logging on, if you want the SDK to log to the console. Turn this off to increase the app's overall performance.
 
 
@@ -148,7 +148,7 @@ new RelutionIoTService()
 
 #### Relution SmartBeacon calibration
 To calibrate the RSSI value of an iBeacon message, just place the device 1 meter away from the beacon
-and send the mean RSSI value (of approximately 10 seconds) to Relution by calling ```calibrateIBeacon```, as shown below:
+and send the mean RSSI value (based on measurements of approximately 10 seconds) to Relution by calling ```calibrateIBeacon```, as shown below:
 
 ```java
 RelutionIoTService.addBeaconMessageObserver(new RelutionIoTService.BeaconMessageObserver() {
@@ -222,7 +222,7 @@ RelutionIoTService.addRelutionTagObserver(new RelutionIoTService.RelutionTagObse
 Use the core layer, if you want to build beacon-aware apps that are independent of Relution.
 
 #### Scanning
-Start the scanner, as shown below. You can change the scanner's configuration even if it has already been started.
+Start the scanner, as shown below. You can change the scanner's configuration even if it already running.
 
 ```java
 final BeaconMessageScanner beaconScanner = new BeaconMessageScanner(this);
@@ -254,7 +254,7 @@ beaconScanner.startScanning();
 
 
 #### Logging
-If you want to process beacon messages at a later time, it might be useful to save them on the device persistently and read them out later. To do this, you can use the ```BeaconMessageLogger``` which provides an easy-to-use and thread-safe interface. In most cases you will pass the scanner to the logger's constructor. However, if your message processing pipeline is more complex, you can pass any message processing component implementing the ```BeaconMessageStreamNode``` interface. The received messages will be instantly passed to all receivers that have attached to the logger. Thus, you can use the logger to silently persist the message stream:
+If you want to process beacon messages at a later time, it might be useful to save them on the device persistently and read them out later. To do this, you can use the ```BeaconMessageLogger``` which provides an easy-to-use and thread-safe interface for this purpose. In most cases you will pass the scanner to the logger's constructor. However, if your message processing pipeline is more complex, you can pass any message processing component implementing the ```BeaconMessageStreamNode``` interface. The received messages will be passed to all receivers that have attached to the logger. Thus, you can use the logger as a silent message persistor:
 
 ```java
 // Configure Beacon scanner
@@ -284,7 +284,7 @@ beaconScanner.startScanning();
 
 
 
-If you need to consume all messages saved in the log in one step, you can use the ```readLog``` method. However, if your log contains a large number of messages, better use the log iterator or a for each loop to reduce the memory consumption. The iterator will load the messages in the order they have been saved and is optimized for thread-safety and performance.
+If you need to consume all messages saved in the log in one step, you can use the ```readLog``` method. However, if your log contains a large number of messages, better use the log iterator or a for each loop to reduce memory consumption. The iterator will load the messages in the order they have been saved. It is optimized for thread-safety and performance.
 
 ```java
 for (BeaconMessage message : logger) {
@@ -306,7 +306,7 @@ aggregator.setAverageFilter(new LinearWeightedMovingAverageFilter(0.3f));
 
 
 #### Triggering
-For implementing proximity messaging use cases, use the ```BeaconMessageActionTrigger``` class. The trigger will execute an action, whenever a matching message is received and the location and time conditions are fulfilled. The message-action mapping and the time and location parameters must be defined in a ```BeaconActionRegistry```, as shown below.
+For implementing proximity marketing use cases, use the ```BeaconMessageActionTrigger``` class. The trigger will execute an action, whenever a matching message is received and the specified location and time conditions are fulfilled. The message-action mapping and the time and location parameters must be defined in a ```BeaconActionRegistry```, as shown below.
 
 ```java
 BeaconMessageActionTrigger actionTrigger = new BeaconMessageActionTrigger(scanner, new BeaconActionRegistry() {
