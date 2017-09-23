@@ -2,7 +2,7 @@
 # BlueRange SDK
 
 
-[![CI Status](https://travis-ci.org/me-mway/BlueRange-SDK-Android.svg?branch=master)](https://travis-ci.org/me-mway/BlueRange-SDK-Android)
+[![CI Status](https://travis-ci.org/mwaylabs/BlueRange-SDK-Android.svg?branch=master)](https://travis-ci.org/mwaylabs/BlueRange-SDK-Android)
 
 
 ## Overview
@@ -72,7 +72,7 @@ More specifically, the following features are supported:
 The easiest way to import the BlueRangeSDK is to add a dependency to your project's ```build.gradle``` file:
 ```gradle
 dependencies {
-    compile 'com.mway.bluerange.android.sdk:bluerangesdk:1.1.11@aar'
+    compile 'com.mway.bluerange.android.sdk:bluerangesdk:1.1.14@aar'
 }
 ```
 

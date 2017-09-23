@@ -2,13 +2,13 @@ apply plugin: 'com.android.library'
 
 android {
     compileSdkVersion 26
-    buildToolsVersion '25.0.0'
+    buildToolsVersion '26.0.1'
 
     defaultConfig {
         minSdkVersion 18
         targetSdkVersion 26
         versionCode 6
-        versionName "1.1.13"
+        versionName "1.1.14"
     }
     buildTypes {
         release {
@@ -58,7 +58,7 @@ android {
 ext {
     bintrayRepo = 'BlueRangeSDK'
     bintrayName = 'BlueRange-SDK-Android'
-    versionName = "1.1.13"
+    versionName = "1.1.14"
 
     publishedGroupId = 'com.mway.bluerange.android.sdk'
     libraryName = 'bluerangesdk'
@@ -66,18 +66,18 @@ ext {
 
     libraryDescription = 'Android SDK for interaction with Relution SmartBeacons.'
 
-    siteUrl = 'https://github.com/me-mway/BlueRange-SDK-Android'
-    gitUrl = 'https://github.com/me-mway/BlueRange-SDK-Android.git'
+    siteUrl = 'https://github.com/mwaylabs/BlueRange-SDK-Android'
+    gitUrl = 'https://github.com/mwaylabs/BlueRange-SDK-Android.git'
 
-    libraryVersion = '1.1.13'
+    libraryVersion = '1.1.14'
 
     developerId = 'me-mway'
     developerName = 'me-mway'
     developerEmail = 'm.ehrlich@mwaysolutions.com'
 
-    licenseName = 'New BSD License'
-    licenseUrl = 'https://opensource.org/licenses/BSD-3-Clause'
-    allLicenses = ["BSD 3-Clause"]
+    licenseName = 'The Apache Software License, Version 2.0'
+    licenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+    allLicenses = ["Apache-2.0"]
 }
 
 dependencies {
